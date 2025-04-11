@@ -1,0 +1,11 @@
+project_id,client_name,status,category,city,last_updated
+101,Acme Corp,Open,Analytics,New York,2024-12-01
+102,Globex Inc,Closed,Data Governance,San Francisco,2025-01-15
+103,Initech,In Progress,Visualization,Omaha,2025-02-10
+104,Acme Corp,Open,Automation,Chicago,2025-03-05
+105,Vandelay Industries,Closed,Analytics,New York,2025-03-30
+106,Hooli,Open,Visualization,Chicago,2025-04-12
+107,Globex Inc,Open,Analytics,Omaha,2025-04-15
+108,Pied Piper,Closed,Security,San Francisco,2025-04-20
+109,Massive Dynamic,In Progress,Automation,New York,2025-04-22
+110,Wonka Industries,Open,Governance,Omaha,2025-04-28
