@@ -30,17 +30,18 @@ try:
         st.write("⚙️ Starting agent...")
 
         try:
-            async for event in root_agent.run_async(invocation_context=None, input=query):
+            async for event in root_agent.run_async(query):  # ✅ Simplest stable usage
                 st.write("🔄 Event received")
                 events.append(str(event))
                 if event.is_final:
                     st.write("✅ Final response received")
                     result = str(event.output)
         except Exception as e:
-            st.error(f"❌ Agent execution failed: {e}")
+            st.error("❌ Agent execution failed.")
+            st.code(f"{type(e).__name__}: {e}")
             return "Error during agent execution."
 
-        # Show debug info
+        # Debug output
         st.subheader("🛠️ Debug: Raw Agent Events")
         for e in events:
             st.text(e)
