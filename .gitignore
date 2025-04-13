@@ -21,3 +21,7 @@ __pycache__/
 *.swp
 *.swo
 *.bak
+
+# testing and old
+testing.py
+agent-original.py
