@@ -1,17 +1,17 @@
 import os
 import asyncio
+import streamlit as st  # ✅ Only ONE import now
 
 # Load environment variables from Streamlit secrets if available
 try:
-    import streamlit as st
     if st.secrets:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
         os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = st.secrets["GOOGLE_GENAI_USE_VERTEXAI"]
 except ImportError:
     pass
 
-import streamlit as st
 from agent import root_agent
+from google.adk.models import InvocationContext  # ✅ Add this line
 
 st.set_page_config(page_title="Multi-Tool Agent", layout="centered")
 st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
