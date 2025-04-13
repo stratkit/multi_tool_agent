@@ -12,13 +12,13 @@ except ImportError:
 
 import streamlit as st
 from agent import root_agent
-from google.adk.models import InvocationContext
 
 st.set_page_config(page_title="Multi-Tool Agent", layout="centered")
 st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
 
 query = st.text_input("Ask your question:")
 
+# Async wrapper
 async def run_agent_and_return_response():
     result = ""
     events = []
@@ -26,8 +26,8 @@ async def run_agent_and_return_response():
     st.write("⚙️ Starting agent...")
 
     try:
-        context = InvocationContext(input=query)
-        async for event in root_agent.run_async(context):
+        # ✅ No context, just a string input
+        async for event in root_agent.run_async(query):
             st.write("🔄 Event received")
             events.append(str(event))
             if event.is_final:
