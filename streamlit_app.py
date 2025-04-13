@@ -21,12 +21,24 @@ try:
     query = st.text_input("Ask your question:")
 
     if query:
-        async def run_agent_and_return_response():
-            result = ""
-            async for event in root_agent.run_async(input=query):
-                if event.is_final:
-                    result = str(event.output)
-            return result
+
+        ##
+async def run_agent_and_return_response():
+    result = ""
+    events = []
+    async for event in root_agent.run_async(input=query):
+        events.append(str(event))
+        if event.is_final:
+            result = str(event.output)
+
+    # Show raw events for debugging
+    st.subheader("Debug: Raw Agent Events")
+    for e in events:
+        st.text(e)
+
+    return result
+
+        ##
 
         with st.spinner("Thinking..."):
             response = asyncio.run(run_agent_and_return_response())
