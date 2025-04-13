@@ -10,10 +10,12 @@ os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = st.secrets["GOOGLE_GENAI_USE_VERTEXAI"
 st.set_page_config(page_title="Multi-Tool Agent", layout="centered")
 st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
 
+import asyncio
+
 query = st.text_input("Ask your question:")
 
 if query:
     with st.spinner("Thinking..."):
-        response = root_agent.run_sync(query)
+        response = asyncio.run(root_agent.run_async(query))
         st.success("Done!")
         st.write(response)
