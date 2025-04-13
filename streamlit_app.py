@@ -8,7 +8,7 @@ try:
         os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
         os.environ["GOOGLE_GENAI_USE_VERTEXAI"] = st.secrets["GOOGLE_GENAI_USE_VERTEXAI"]
 except ImportError:
-    # Not running in Streamlit, fallback to local env vars or .env file if used
+    # Not running in Streamlit, fallback to local env vars
     pass
 
 from agent import root_agent
@@ -22,7 +22,7 @@ try:
 
     query = st.text_input("Ask your question:")
 
-    # Async wrapper for agent call
+    # Async wrapper for running the agent
     async def run_agent_and_return_response():
         result = ""
         events = []
@@ -30,7 +30,7 @@ try:
         st.write("⚙️ Starting agent...")
 
         try:
-            async for event in root_agent.run_async(input=query):
+            async for event in root_agent.run_async(query):  # ✅ Correct usage
                 st.write("🔄 Event received")
                 events.append(str(event))
                 if event.is_final:
@@ -41,7 +41,7 @@ try:
             return "Error during agent execution."
 
         # Show debug info
-        st.subheader("Debug: Raw Agent Events")
+        st.subheader("🛠️ Debug: Raw Agent Events")
         for e in events:
             st.text(e)
 
@@ -51,7 +51,7 @@ try:
         with st.spinner("Thinking..."):
             response = asyncio.run(run_agent_and_return_response())
             st.success("Done!")
-            st.write("### 🧠 Response")
+            st.write("### 🧠 Agent Response")
             st.write(response)
 
 except Exception as e:
