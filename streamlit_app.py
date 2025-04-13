@@ -1,6 +1,6 @@
 import os
 import asyncio
-import streamlit as st  # ✅ Only ONE import now
+import streamlit as st
 
 # Load environment variables from Streamlit secrets if available
 try:
@@ -11,7 +11,7 @@ except ImportError:
     pass
 
 from agent import root_agent
-from google.adk.models import InvocationContext  # ✅ Add this line
+from google.adk.models import InvocationContext
 
 st.set_page_config(page_title="Multi-Tool Agent", layout="centered")
 st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
@@ -26,13 +26,14 @@ async def run_agent_and_return_response():
     st.write("⚙️ Starting agent...")
 
     try:
-        # ✅ No context, just a string input
-        async for event in root_agent.run_async(query):
+        context = InvocationContext(input=query)
+        async for event in root_agent.run_async(context):
             st.write("🔄 Event received")
             events.append(str(event))
             if event.is_final:
                 st.write("✅ Final response received")
                 result = str(event.output)
+
     except Exception as e:
         st.error("❌ Agent execution failed.")
         st.code(f"{type(e).__name__}: {e}")
