@@ -30,7 +30,7 @@ try:
         st.write("⚙️ Starting agent...")
 
         try:
-            async for event in root_agent.run_async(query):  # ✅ Correct usage
+            async for event in root_agent.run_async(invocation_context=None, input=query):
                 st.write("🔄 Event received")
                 events.append(str(event))
                 if event.is_final:
