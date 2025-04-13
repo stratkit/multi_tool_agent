@@ -13,7 +13,11 @@ st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
 query = st.text_input("Ask your question:")
 
 async def run_agent(query):
-    return await root_agent.run_async(query)
+    output = ""
+    async for event in root_agent.run_async(query):
+        if event.is_final:  # When response is complete
+            output = str(event.output)
+    return output
 
 if query:
     with st.spinner("Thinking..."):
