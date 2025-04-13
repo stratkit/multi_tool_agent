@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 
-from multi_tool_agent.agent import root_agent  # adjust path if needed
+from agent import root_agent  # adjust path if needed
 
 # Load secrets (you’ll set these in Streamlit Cloud)
 os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
