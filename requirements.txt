@@ -1,4 +1,4 @@
 streamlit
 pandas
 google-generativeai
-google-adk @ git+https://github.com/google-deepmind/agent-development-kit.git
+git+https://github.com/google-deepmind/agent-development-kit.git
