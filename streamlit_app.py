@@ -11,7 +11,7 @@ except ImportError:
     pass
 
 from agent import root_agent
-from google.adk.models import InvocationContext
+from google.adk.invocation import InvocationContext
 
 st.set_page_config(page_title="Multi-Tool Agent", layout="centered")
 st.title("🤖 mullt.ai — Your Multi-Agent Assistant")
